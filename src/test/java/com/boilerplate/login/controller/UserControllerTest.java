@@ -2,6 +2,7 @@ package com.boilerplate.login.controller;
 
 import com.boilerplate.login.controller.request.UserJoinRequest;
 import com.boilerplate.login.controller.request.UserLoginRequest;
+import com.boilerplate.login.exception.ErrorCode;
 import com.boilerplate.login.exception.LoginApplicationException;
 import com.boilerplate.login.model.User;
 import com.boilerplate.login.service.UserService;
@@ -57,7 +58,7 @@ public class UserControllerTest {
         String userName = "userName";
         String password = "password";
 
-        when(userService.join(userName,password)).thenThrow(new LoginApplicationException());
+        when(userService.join(userName,password)).thenThrow(new LoginApplicationException(ErrorCode.DUPLICATED_USER_NAME, ""));
 
         mockMvc.perform(post("/api/v1/users/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +88,7 @@ public class UserControllerTest {
         String password = "password";
 
         // TODO: mocking
-        when(userService.login(userName,password)).thenThrow(new LoginApplicationException());
+        when(userService.login(userName,password)).thenThrow(new LoginApplicationException(ErrorCode.DUPLICATED_USER_NAME,""));
 
         mockMvc.perform(post("/api/v1/users/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -102,7 +103,7 @@ public class UserControllerTest {
         String password = "password";
 
         // TODO: mocking
-        when(userService.login(userName,password)).thenThrow(new LoginApplicationException());
+        when(userService.login(userName,password)).thenThrow(new LoginApplicationException(ErrorCode.INVALID_PASSWORD));
 
         mockMvc.perform(post("/api/v1/users/login")
                         .contentType(MediaType.APPLICATION_JSON)
