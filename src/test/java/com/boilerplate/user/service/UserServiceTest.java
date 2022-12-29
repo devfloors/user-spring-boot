@@ -1,9 +1,9 @@
 package com.boilerplate.user.service;
 
+import com.boilerplate.user.domain.User;
 import com.boilerplate.user.exception.LoginApplicationException;
-import com.boilerplate.user.fixture.UserEntityFixture;
-import com.boilerplate.user.model.entity.UserEntity;
-import com.boilerplate.user.repository.UserEntityRepository;
+import com.boilerplate.user.fixture.UserFixture;
+import com.boilerplate.user.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @MockBean
-    private UserEntityRepository userEntityRepository;
+    private UserRepository userRepository;
 
     @MockBean
     private BCryptPasswordEncoder encoder;
@@ -33,11 +33,11 @@ public class UserServiceTest {
         String userName = "userName";
         String password = "password";
 
-        UserEntity fixture = UserEntityFixture.get(userName,password);
+        User fixture = UserFixture.get(userName,password);
 
-        when(userEntityRepository.findByUserName(userName)).thenReturn(Optional.empty());
+        when(userRepository.findByUserName(userName)).thenReturn(Optional.empty());
         when(encoder.encode(password)).thenReturn("encrypt_password");
-        when(userEntityRepository.save(any())).thenReturn(UserEntityFixture.get(userName, password));
+        when(userRepository.save(any())).thenReturn(UserFixture.get(userName, password));
 
         Assertions.assertDoesNotThrow(() -> userService.join(userName, password));
     }
@@ -47,11 +47,11 @@ public class UserServiceTest {
         String userName = "userName";
         String password = "password";
 
-        UserEntity fixture = UserEntityFixture.get(userName,password);
+        User fixture = UserFixture.get(userName,password);
 
-        when(userEntityRepository.findByUserName(userName)).thenReturn(Optional.of(fixture));
+        when(userRepository.findByUserName(userName)).thenReturn(Optional.of(fixture));
         when(encoder.encode(password)).thenReturn("encrypt_password");
-        when(userEntityRepository.save(any())).thenReturn(Optional.of(fixture));
+        when(userRepository.save(any())).thenReturn(Optional.of(fixture));
 
         Assertions.assertThrows(LoginApplicationException.class,() -> userService.join(userName, password));
     }
@@ -61,9 +61,9 @@ public class UserServiceTest {
         String userName = "userName";
         String password = "password";
 
-        UserEntity fixture = UserEntityFixture.get(userName,password);
+        User fixture = UserFixture.get(userName,password);
 
-        when(userEntityRepository.findByUserName(userName)).thenReturn(Optional.of(fixture));
+        when(userRepository.findByUserName(userName)).thenReturn(Optional.of(fixture));
         when(encoder.matches(password, fixture.getPassword())).thenReturn(true);
         Assertions.assertDoesNotThrow(() -> userService.login(userName, password));
     }
@@ -73,7 +73,7 @@ public class UserServiceTest {
         String userName = "userName";
         String password = "password";
 
-        when(userEntityRepository.findByUserName(userName)).thenReturn(Optional.empty());
+        when(userRepository.findByUserName(userName)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(LoginApplicationException.class,() -> userService.login(userName, password));
     }
@@ -84,9 +84,9 @@ public class UserServiceTest {
         String password = "password";
         String wrongPassword = "wrongPassword";
 
-        UserEntity fixture = UserEntityFixture.get(userName,password);
+        User fixture = UserFixture.get(userName,password);
 
-        when(userEntityRepository.findByUserName(userName)).thenReturn(Optional.empty());
+        when(userRepository.findByUserName(userName)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(LoginApplicationException.class,() -> userService.login(userName, wrongPassword));
     }

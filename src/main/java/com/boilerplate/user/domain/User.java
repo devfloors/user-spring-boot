@@ -1,6 +1,6 @@
 package com.boilerplate.user.domain;
 
-import com.boilerplate.user.model.UserRole;
+import com.boilerplate.user.domain.enumeration.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
