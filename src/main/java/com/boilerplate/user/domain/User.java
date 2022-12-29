@@ -1,5 +1,6 @@
 package com.boilerplate.user.domain;
 
+import com.boilerplate.user.model.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -37,6 +38,10 @@ public class User implements Serializable {
 //    @Size(min = 5, max = 254)
     @Column(length = 254, unique = true)
     private String email;
+
+    @Column(name ="role")
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.USER;
 
     @JsonIgnore
     @ManyToMany

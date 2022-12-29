@@ -2,9 +2,9 @@ package com.boilerplate.user.controller;
 
 import com.boilerplate.user.controller.request.UserJoinRequest;
 import com.boilerplate.user.controller.request.UserLoginRequest;
+import com.boilerplate.user.domain.User;
 import com.boilerplate.user.exception.ErrorCode;
 import com.boilerplate.user.exception.LoginApplicationException;
-import com.boilerplate.user.model.User;
 import com.boilerplate.user.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.boilerplate.user.controller.Response;
+package com.boilerplate.user.controller.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
