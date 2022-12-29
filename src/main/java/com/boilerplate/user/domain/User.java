@@ -3,6 +3,7 @@ package com.boilerplate.user.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Table(name = "user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Data
+@NoArgsConstructor
 public class User implements Serializable {
 
     @Id
@@ -28,12 +30,8 @@ public class User implements Serializable {
     private String password;
 
 //    @Size(max = 50)
-    @Column(name = "first_name", length = 50)
-    private String firstName;
-
-//    @Size(max = 50)
-    @Column(name = "last_name", length = 50)
-    private String lastName;
+    @Column(name = "user_name", length = 50)
+    private String userName;
 
 //    @Email
 //    @Size(min = 5, max = 254)
