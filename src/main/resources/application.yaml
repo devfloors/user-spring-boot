@@ -1,17 +1,16 @@
 spring.jpa:
-  database: postgresql
-  hibernate.dialect: org.hibernate.dialect.PostgresQLDialect
+  hibernate.dialect: org.hibernate.dialect.MariaDBDialect
   hibernate.ddl-auto: update
   properties.hibernate.format_sql: true
-  show-sql: tru
+  show-sql: true
 
 spring.datasource:
-    hikari.maximum-pool-size: 4
-    url:
-    username:
-    password:
-    platform: postgres
-    driver-class-name: org.postresql.Driver
+  url: jdbc:mariadb://localhost:3306/user
+  username: user
+  password: password
+  platform: mariadb
+  driver-class-name: org.mariadb.jdbc.Driver
+  hikari.maximum-pool-size: 20
 
 jwt:
   secret-key: login-appllication-2022-12-25.secret_key
