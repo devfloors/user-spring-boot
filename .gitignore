@@ -283,6 +283,6 @@ gradle-app.setting
 *.hprof
 
 ### docker ###
-db/**
+db/
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,intellij+all,intellij+iml,gradle,java
