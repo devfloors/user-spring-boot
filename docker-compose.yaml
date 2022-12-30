@@ -1,0 +1,17 @@
+version: "3.1"
+
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10.8.2
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: user
+      MARIADB_USER: user
+      MARIADB_PASSWORD: password
+      TZ: Asia/Seoul
+    volumes:
+      - ../../db:/var/lib/mysql
+    ports:
+      - 3306:3306
+
