@@ -1,1 +1,1 @@
-# Login for Spring Boot
+# user domain for Spring Boot
